@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayog Shala | Hands-On Science & Gender Equality Initiative by Yash Butani</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        saffron: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        accent: '#06b6d4',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 glass-card border-b border-slate-200/80 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo & Initiative Name -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-accent to-saffron-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+                        <i class="fa-solid font-bold text-2xl fa-flask animate-pulse"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-heading font-extrabold text-2xl text-slate-900 tracking-tight">Prayog Shala</span>
+                            <span class="text-xs bg-saffron-100 text-saffron-800 font-semibold px-2.5 py-0.5 rounded-full border border-saffron-300">Individual Initiative</span>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Hands-On STEM & Gender Parity by Yash Butani</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl font-medium text-sm text-brand-600 bg-brand-50 transition-all">Home</button>
+                    <button onclick="switchTab('story')" id="nav-story" class="nav-btn px-4 py-2 rounded-xl font-medium text-sm text-slate-600 hover:text-brand-600 hover:bg-slate-100 transition-all">My Story</button>
+                    <button onclick="switchTab('fundraising')" id="nav-fundraising" class="nav-btn px-4 py-2 rounded-xl font-medium text-sm text-slate-600 hover:text-brand-600 hover:bg-slate-100 transition-all">Fundraising & Transparency</button>
+                    <button onclick="switchTab('sessions')" id="nav-sessions" class="nav-btn px-4 py-2 rounded-xl font-medium text-sm text-slate-600 hover:text-brand-600 hover:bg-slate-100 transition-all">Past Sessions</button>
+                    <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn ml-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-brand-600 to-accent hover:opacity-95 shadow-md shadow-brand-600/20 transition-all">Donate</button>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white/95 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+            <button onclick="switchTab('home')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Home</button>
+            <button onclick="switchTab('story')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">My Story</button>
+            <button onclick="switchTab('fundraising')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Fundraising & Transparency</button>
+            <button onclick="switchTab('sessions')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Past Sessions</button>
+            <button onclick="switchTab('contact')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-semibold text-white bg-brand-600 mt-2">Donate</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="min-h-screen">
+
+        <!-- ==================== TAB 1: HOME ==================== -->
+        <section id="tab-home" class="tab-content block">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+                <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-accent/10 blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 rounded-full bg-saffron-400/10 blur-3xl pointer-events-none"></div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-4xl mx-auto">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-saffron-50 border border-saffron-200 text-saffron-800 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+                            <i class="fa-solid fa-flask-vial text-saffron-600"></i> Interactive Science Experiments for Government Schools
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-6xl font-heading font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Replacing Rote Learning with <span class="gradient-text">Practical Observation</span> & Empowering Girls in STEM
+                        </h1>
+
+                        <p class="mt-6 text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-normal">
+                            I bring fun, hands-on science experiments directly to middle school students (Grades 6–9) in government schools—building real scientific intuition while breaking limiting gender stereotypes.
+                        </p>
+
+                        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <button onclick="switchTab('fundraising')" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-600 to-accent text-white font-bold text-base shadow-lg shadow-brand-500/25 hover:shadow-xl hover:opacity-95 transition-all">
+                                <i class="fa-solid fa-heart mr-2"></i> Support My Diwali Stall Fundraiser
+                            </button>
+                            <button onclick="switchTab('story')" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white text-slate-700 font-bold text-base border border-slate-200 hover:bg-slate-50 transition-all">
+                                Read My Story & Mission
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Impact Quick Highlights (Focused on Current Initiative) -->
+                    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-brand-50 text-brand-600 rounded-2xl text-2xl">
+                                <i class="fa-solid fa-school text-brand-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold font-heading text-slate-900">Government Schools</h3>
+                                <p class="text-sm text-slate-500 mt-1">Visiting local government schools to support students in Grades 6th to 9th.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-saffron-50 text-saffron-600 rounded-2xl text-2xl">
+                                <i class="fa-solid fa-hand-holding-hand"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold font-heading text-slate-900">Empowering Girls</h3>
+                                <p class="text-sm text-slate-500 mt-1">Dismantling social constructs that limit girls' access and interest in STEM.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-cyan-50 text-cyan-600 rounded-2xl text-2xl">
+                                <i class="fa-solid fa-vial-circle-check"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold font-heading text-slate-900">Self-Funded Demos</h3>
+                                <p class="text-sm text-slate-500 mt-1">Raising experiment funds via school stalls like the Stonehill Diwali Mela.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 2: MY STORY ==================== -->
+        <section id="tab-story" class="tab-content hidden py-12">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header -->
+                <div class="text-center mb-10">
+                    <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Personal Journey</span>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-slate-900 mt-1">My Story & Drive Behind Prayog Shala</h2>
+                    <p class="text-slate-500 text-sm max-w-xl mx-auto mt-2">Click through the sections below to explore my mission, the root problems I recognized, and my past history.</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-saffron-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <!-- Interactive Section Switcher Tabs for Story -->
+                <div class="flex flex-wrap justify-center gap-2 mb-8 bg-slate-200/70 p-1.5 rounded-2xl max-w-2xl mx-auto">
+                    <button id="story-tab-btn-1" onclick="switchStorySection(1)" class="story-tab-btn flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold bg-white text-brand-600 shadow-sm transition-all">
+                        1. The Mission
+                    </button>
+                    <button id="story-tab-btn-2" onclick="switchStorySection(2)" class="story-tab-btn flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-brand-600 transition-all">
+                        2. Problems & Action
+                    </button>
+                    <button id="story-tab-btn-3" onclick="switchStorySection(3)" class="story-tab-btn flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-brand-600 transition-all">
+                        3. History & Past Work
+                    </button>
+                </div>
+
+                <!-- STORY CONTENT CARDS -->
+                <div class="space-y-6">
+
+                    <!-- SECTION 1: THE MISSION -->
+                    <div id="story-sec-1" class="story-sec-block bg-white p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden transition-all duration-300">
+                        <div class="absolute right-0 top-0 w-32 h-32 bg-brand-500/10 rounded-bl-full pointer-events-none"></div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-lg">
+                                01
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 font-heading">The Mission</h3>
+                        </div>
+                        <p class="text-slate-700 leading-relaxed text-base sm:text-lg font-normal mb-4">
+                            My core mission with <strong>Prayog Shala</strong> is to personally go to government schools and teach students in Grades 6th through 9th science concepts through observation and fun, interactive experiments.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                            I want to help students build strong scientific visualization and intuition, while simultaneously promoting STEM to young girls and actively breaking traditional gender stereotypes that restrict their potential.
+                        </p>
+
+                        <!-- Interactive Mission Highlight Box -->
+                        <div class="mt-6 p-4 rounded-2xl bg-brand-50/70 border border-brand-100 flex items-start gap-3">
+                            <i class="fa-solid fa-lightbulb text-brand-600 text-xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-sm text-brand-900">Why I Focus on Hands-On Observation</h4>
+                                <p class="text-xs text-brand-800 mt-0.5">I have always had a deep passion for STEM and engineering. I realized that most science concepts are taught with maximum theory and minimal practical examples, missing the opportunity to kindle true visual intuition.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: PROBLEMS RECOGNIZED & ACTION PLAN -->
+                    <div id="story-sec-2" class="story-sec-block hidden bg-white p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden transition-all duration-300">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-saffron-100 text-saffron-700 flex items-center justify-center font-bold text-lg">
+                                02
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900 font-heading">Problems I Recognized & My Action Plan</h3>
+                                <p class="text-xs text-slate-500">How I connect these real-world issues directly to my mission</p>
+                            </div>
+                        </div>
+
+                        <!-- Problem 1 -->
+                        <div class="mb-6 p-5 bg-red-50/60 rounded-2xl border border-red-100">
+                            <h4 class="font-bold text-slate-900 text-base mb-2 flex items-center gap-2 text-rose-700">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Problem 1: Gender Stereotypes Restricting Girls
+                            </h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Many times, especially in traditional or old-school Indian societies, boys are encouraged to pursue academics and STEM fields, while girls are assigned home roles and taught this from a young age. This demotivates girls and severely restricts their aspirations.
+                            </p>
+                        </div>
+
+                        <!-- Problem 2 -->
+                        <div class="mb-6 p-5 bg-amber-50/60 rounded-2xl border border-amber-100">
+                            <h4 class="font-bold text-slate-900 text-base mb-2 flex items-center gap-2 text-amber-800">
+                                <i class="fa-solid fa-book-bookmark"></i> Problem 2: Pure Theory vs. Practical intuition
+                            </h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Majority of science concepts are simply taught through maximum theory and minimal practical examples. Although this gets students through exams, they lose the opportunity to build intuition for visualization. Students in underprivileged communities and government schools face this even more due to lack of resources.
+                            </p>
+                        </div>
+
+                        <!-- Action Plan Linking Back to Mission -->
+                        <div class="p-6 bg-gradient-to-r from-brand-600 to-accent text-white rounded-2xl shadow-md">
+                            <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-bullseye"></i> My Action Plan: Fulfilling The Mission
+                            </h4>
+                            <p class="text-sm text-slate-100 leading-relaxed">
+                                To be able to buy materials for these experiments, I am raising my own funds by setting up food stalls—starting with the Diwali Mela at my school, Stonehill International. All profit goes directly towards purchasing equipment for my hands-on teaching sessions in government schools!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3: HISTORY & PAST WORK -->
+                    <div id="story-sec-3" class="story-sec-block hidden bg-white p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden transition-all duration-300">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold text-lg">
+                                03
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900 font-heading">History & Past Experiences</h3>
+                                <p class="text-xs text-slate-500">Steps I took prior to launching Prayog Shala</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- 9th Grade Work -->
+                            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/80 hover:border-brand-300 transition">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-saffron-700 font-bold text-xs bg-saffron-100 px-2.5 py-1 rounded-full"><i class="fa-solid fa-graduation-cap"></i> 9th Grade Summer</span>
+                                    <span class="text-xs font-semibold text-slate-400">TribesForGood</span>
+                                </div>
+                                <h4 class="font-bold text-slate-900 text-base mb-2">NGO Collaboration Network</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    In my 9th grade summer, I worked with <strong>TribesForGood</strong> to connect with NGOs across India, including <strong>CHI (Child Hope India)</strong>, <strong>Akanksha Foundation (Bangalore)</strong>, and <strong>Shakti Foundation</strong>, reaching over 70+ students to educate them on gender roles.
+                                </p>
+                            </div>
+
+                            <!-- 10th Grade Personal Project -->
+                            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/80 hover:border-brand-300 transition">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-brand-700 font-bold text-xs bg-brand-100 px-2.5 py-1 rounded-full"><i class="fa-solid fa-film"></i> 10th Grade Project</span>
+                                    <span class="text-xs font-semibold text-slate-400">Personal Project</span>
+                                </div>
+                                <h4 class="font-bold text-slate-900 text-base mb-2">Social Construct Documentary</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    In 10th grade, I created a documentary film around gender equality and social constructs to educate 6th-grade students at my school, helping them understand how limiting gender roles are constructed.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 3: FUNDRAISING & TRANSPARENCY ==================== -->
+        <section id="tab-fundraising" class="tab-content hidden py-12">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <span class="text-saffron-600 font-semibold text-sm tracking-wider uppercase">Diwali Mela Stall</span>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-slate-900 mt-1">Fundraising & Financial Transparency</h2>
+                    <p class="text-slate-500 max-w-2xl mx-auto mt-2">Every rupee raised goes directly into buying physical experiment materials for government school science sessions.</p>
+                </div>
+
+                <!-- Current Campaign Card -->
+                <div class="bg-gradient-to-br from-brand-900 to-slate-900 text-white rounded-3xl p-8 mb-12 shadow-xl relative overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                        <div class="md:col-span-2">
+                            <span class="inline-block bg-saffron-500 text-slate-950 font-bold text-xs uppercase px-3 py-1 rounded-full mb-3">Upcoming Stall Event</span>
+                            <h3 class="text-2xl sm:text-3xl font-heading font-bold">Stonehill International School Diwali Mela Stall</h3>
+                            <p class="text-slate-300 mt-2 text-sm leading-relaxed">
+                                I am setting up a fundraising stall at my school's Diwali Mela selling tasty snacks, food items, and beverages. All profit goes straight towards purchasing science experiment supplies for government school sessions.
+                            </p>
+                            
+                            <!-- Progress Bar -->
+                            <div class="mt-6">
+                                <div class="flex justify-between text-xs font-semibold mb-2">
+                                    <span class="text-saffron-400">Current Raised: ₹0 (Stall Upcoming)</span>
+                                    <span class="text-slate-300 font-bold">Stall Profit Goal: ₹8,000</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700">
+                                    <div class="bg-gradient-to-r from-saffron-500 to-amber-400 h-full rounded-full w-[10%]"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 text-center">
+                            <i class="fa-solid fa-store text-4xl text-saffron-400 mb-3"></i>
+                            <h4 class="font-bold text-lg">Stall Menu</h4>
+                            <p class="text-xs text-slate-300 mt-1">Tasty snacks, food items & refreshing beverages</p>
+                            <span class="mt-4 inline-block text-xs font-semibold bg-white text-slate-900 px-4 py-2 rounded-xl">Target Profit: ₹8,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTERACTIVE FUNDRAISING IMPACT CALCULATOR WIDGET -->
+                <div class="bg-gradient-to-r from-saffron-50 to-amber-50 rounded-3xl border border-saffron-200 p-6 sm:p-8 mb-12">
+                    <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-calculator text-saffron-600"></i> Interactive Stall Sales & Impact Calculator
+                    </h3>
+                    <p class="text-xs text-slate-600 mb-6">Drag the slider to see how snack stall profits translate into funded hands-on experiment sessions!</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                        <div class="md:col-span-2 space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm font-bold text-slate-800 mb-1">
+                                    <span>Estimated Food Stall Profit:</span>
+                                    <span id="calc-sales-val" class="text-saffron-700 font-extrabold text-base">₹8,000</span>
+                                </div>
+                                <input id="calc-slider" type="range" min="1000" max="15000" step="500" value="8000" oninput="updateImpactCalc(this.value)" class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-saffron-600">
+                            </div>
+                            <div class="flex justify-between text-xs text-slate-400 font-semibold">
+                                <span>₹1,000</span>
+                                <span>Goal: ₹8,000</span>
+                                <span>₹15,000</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-saffron-200 shadow-sm text-center">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Impact Funded</span>
+                            <div id="calc-kits-count" class="text-3xl font-extrabold text-brand-600 font-heading my-1">8 Experiment Sessions</div>
+                            <p id="calc-impact-desc" class="text-xs text-slate-500">Funds materials for 8 interactive hands-on science sessions!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expense & Receipt Log -->
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-file-invoice-dollar text-brand-600"></i> Expense & Bill Receipt Log
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">I will upload verified bills here as soon as I purchase materials with stall funds.</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-semibold text-slate-400">Total Spent so Far</span>
+                            <div class="text-2xl font-bold text-slate-900 font-heading">₹0.00</div>
+                        </div>
+                    </div>
+
+                    <!-- Receipt Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-600">
+                            <thead class="bg-slate-50 text-slate-700 font-semibold uppercase text-xs border-b border-slate-200">
+                                <tr>
+                                    <th class="py-3 px-4">Date</th>
+                                    <th class="py-3 px-4">Item Description</th>
+                                    <th class="py-3 px-4">Qty</th>
+                                    <th class="py-3 px-4">Unit Price</th>
+                                    <th class="py-3 px-4">Total</th>
+                                    <th class="py-3 px-4 text-center">Bill / Receipt</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50/50 italic text-slate-400">
+                                    <td class="py-4 px-4">—</td>
+                                    <td class="py-4 px-4 font-normal">Pending material purchases (Will be updated post Diwali Mela)</td>
+                                    <td class="py-4 px-4">—</td>
+                                    <td class="py-4 px-4">—</td>
+                                    <td class="py-4 px-4">—</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <span class="text-xs text-slate-400 bg-slate-100 px-3 py-1 rounded-lg">To Be Updated</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 4: PAST SESSIONS & IMPACT LOG ==================== -->
+        <section id="tab-sessions" class="tab-content hidden py-12">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Classroom Sessions</span>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-slate-900 mt-1">Sessions I Have Conducted</h2>
+                    <p class="text-slate-500 max-w-2xl mx-auto mt-2">Documenting my hands-on workshops in government schools.</p>
+                </div>
+
+                <!-- Session Card 1 -->
+                <div class="session-card session-physics bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-8 transition-all">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <span class="bg-brand-100 text-brand-800 font-semibold text-xs px-3 py-1 rounded-full">Session #1</span>
+                            <span class="text-xs font-semibold text-slate-700 bg-slate-100 px-3 py-1 rounded-full"><i class="fa-regular fa-calendar mr-1"></i> Saturday, October 31, 2026</span>
+                        </div>
+                        <h3 class="text-2xl font-bold font-heading text-slate-900">States of Matter, Temperature & Energy Transfer</h3>
+                        <p class="text-slate-500 text-sm mt-1 mb-4"><i class="fa-solid fa-location-dot text-saffron-500 mr-1"></i> Stonehill Government School — 6th Grade Students</p>
+                        
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Last Saturday, I conducted my first teaching session with the 6th-grade students at Stonehill Government School. I taught them about core physical concepts including states of matter (solid, liquid, gas), temperature measurement, and energy transfer through simple, observation-based experiments.
+                        </p>
+
+                        <!-- Experiment Highlights Tag Cloud -->
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs bg-slate-100 text-slate-700 font-medium px-3 py-1 rounded-lg">States of Matter</span>
+                            <span class="text-xs bg-slate-100 text-slate-700 font-medium px-3 py-1 rounded-lg">Temperature Measurement</span>
+                            <span class="text-xs bg-slate-100 text-slate-700 font-medium px-3 py-1 rounded-lg">Energy Transfer</span>
+                            <span class="text-xs bg-saffron-50 text-saffron-800 font-semibold px-3 py-1 rounded-lg border border-saffron-200">Interactive Participation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTERACTIVE STEM EXPERIMENT SIMULATOR (States of Matter) -->
+                <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 mb-10 shadow-xl border border-slate-800">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <span class="bg-cyan-500/20 text-cyan-400 font-bold text-xs uppercase px-3 py-1 rounded-full border border-cyan-500/30">Interactive Demo Tool</span>
+                            <h3 class="text-2xl font-bold font-heading mt-2">States of Matter & Thermal Energy Simulator</h3>
+                            <p class="text-xs text-slate-400 mt-1">This simulation demonstrates how heat energy increases molecular kinetic velocity across Solid, Liquid, and Gas states.</p>
+                        </div>
+                        <div class="bg-slate-800 px-4 py-2 rounded-xl text-center border border-slate-700">
+                            <span class="text-[10px] uppercase text-slate-400 font-bold block">Current State</span>
+                            <span id="state-label" class="text-lg font-extrabold text-cyan-400">SOLID</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                        <!-- Canvas View -->
+                        <div class="md:col-span-2 bg-slate-950 rounded-2xl border border-slate-800 p-2 relative h-56 flex items-center justify-center overflow-hidden">
+                            <canvas id="particle-canvas" class="w-full h-full rounded-xl"></canvas>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="space-y-4 bg-slate-800/60 p-5 rounded-2xl border border-slate-700">
+                            <div>
+                                <label class="flex justify-between text-xs font-bold text-slate-300 mb-1">
+                                    <span>Temperature Control:</span>
+                                    <span id="temp-display" class="text-cyan-400 font-mono">-10 °C</span>
+                                </label>
+                                <input id="temp-slider" type="range" min="-20" max="120" value="-10" oninput="updateSimTemp(this.value)" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                            </div>
+
+                            <div class="text-xs text-slate-300 space-y-1.5 pt-2 border-t border-slate-700">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Kinetic Energy:</span>
+                                    <span id="sim-kinetic-val" class="font-bold text-cyan-400">Low (Vibrating)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Molecular Spacing:</span>
+                                    <span id="sim-space-val" class="font-bold text-slate-200">Tightly Packed</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-2 text-[10px] font-bold text-center">
+                                <button onclick="setSimPreset(-10)" class="bg-slate-700 hover:bg-slate-600 py-1.5 rounded-lg text-cyan-300">Ice (-10°C)</button>
+                                <button onclick="setSimPreset(40)" class="bg-slate-700 hover:bg-slate-600 py-1.5 rounded-lg text-amber-300">Water (40°C)</button>
+                                <button onclick="setSimPreset(110)" class="bg-slate-700 hover:bg-slate-600 py-1.5 rounded-lg text-rose-300">Steam (110°C)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 5: DONATE & CONTACT ==================== -->
+        <section id="tab-contact" class="tab-content hidden py-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Support The Initiative</span>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-slate-900 mt-1">Donate to Prayog Shala</h2>
+                    <p class="text-slate-500 max-w-xl mx-auto mt-2">Any donation will be very nice, thank you for supporting this cause!</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <!-- QR Code & Support Card -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-center">
+                        <span class="text-xs font-bold text-brand-600 uppercase tracking-wider bg-brand-50 px-3 py-1 rounded-full inline-block mb-4">Direct Contribution</span>
+                        <h3 class="text-xl font-bold font-heading text-slate-900 mb-2">Scan & Support via UPI</h3>
+                        <p class="text-xs text-slate-500 mb-6">Scan the QR code below to contribute directly towards purchasing science experiment materials.</p>
+
+                        <!-- Styled QR Code Box -->
+                        <div class="w-56 h-56 mx-auto bg-slate-100 rounded-2xl border-2 border-dashed border-brand-300 flex flex-col items-center justify-center p-4 relative group">
+                            <i class="fa-solid fa-qrcode text-6xl text-brand-500 mb-2"></i>
+                            <span class="text-xs font-bold text-slate-700">UPI / GPay / Paytm QR</span>
+                            <span class="text-[10px] text-slate-400 mt-1">(Scan to Donate)</span>
+                        </div>
+
+                        <p class="mt-6 text-sm font-semibold text-slate-800 bg-saffron-50 border border-saffron-200 p-3 rounded-xl">
+                            "Any donation will be very nice, thank you so much for your support!"
+                        </p>
+                    </div>
+
+                    <!-- Contact Details Card -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                        <h3 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3">Get in Touch with Me</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-slate-400 uppercase">Email Me Directly</span>
+                                    <p class="text-sm font-bold text-slate-900 mt-0.5">yash.butani777@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-lg">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-slate-400 uppercase">Instagram Page</span>
+                                    <p class="text-sm font-bold text-slate-900 mt-0.5">@prayogshala.stem <span class="text-xs font-normal text-slate-400">(Coming Soon)</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inquiry Form -->
+                        <form onsubmit="handleFormSubmit(event)" class="space-y-4 pt-2">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Your Name</label>
+                                <input type="text" required placeholder="Your Name" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Message</label>
+                                <textarea rows="3" required placeholder="Leave a message..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white border-t border-slate-800 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="font-heading font-extrabold text-xl text-white">Prayog Shala</span>
+                <p class="text-xs text-slate-400 mt-1">Individual Initiative by Yash Butani — Hands-on STEM & Gender Parity in Government Schools.</p>
+            </div>
+            <div class="text-xs text-slate-500">
+                Contact: yash.butani777@gmail.com
+            </div>
+        </div>
+    </footer>
+
+    <!-- RECEIPT MODAL -->
+    <div id="receipt-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
+            <button onclick="closeReceiptModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-lg font-bold text-slate-900 font-heading mb-1" id="modal-title">Receipt Details</h3>
+            <p class="text-xs text-slate-500 mb-4" id="modal-amount">Amount: ₹0</p>
+            
+            <div class="bg-slate-100 rounded-2xl p-8 text-center border-2 border-dashed border-slate-300">
+                <i class="fa-solid fa-file-invoice text-4xl text-slate-400 mb-2"></i>
+                <p class="text-xs text-slate-500">Receipt Image Placeholder</p>
+                <span class="text-[10px] text-slate-400 block mt-1" id="modal-filename">Receipt_Scan.pdf</span>
+            </div>
+            <button onclick="closeReceiptModal()" class="w-full mt-4 py-2.5 bg-slate-900 text-white font-semibold rounded-xl text-xs">Close</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Tab switching handler
+        function switchTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.add('hidden'));
+
+            const target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('text-brand-600', 'bg-brand-50');
+                btn.classList.add('text-slate-600');
+            });
+
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn && tabId !== 'contact') {
+                activeBtn.classList.add('text-brand-600', 'bg-brand-50');
+                activeBtn.classList.remove('text-slate-600');
+            }
+
+            if (tabId === 'sessions') {
+                setTimeout(initParticleSim, 100);
+            }
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Story Section Cards
+        function switchStorySection(secId) {
+            const blocks = document.querySelectorAll('.story-sec-block');
+            blocks.forEach(b => b.classList.add('hidden'));
+
+            const target = document.getElementById('story-sec-' + secId);
+            if (target) target.classList.remove('hidden');
+
+            const btns = document.querySelectorAll('.story-tab-btn');
+            btns.forEach((btn, idx) => {
+                if (idx + 1 === secId) {
+                    btn.className = 'story-tab-btn flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold bg-white text-brand-600 shadow-sm transition-all';
+                } else {
+                    btn.className = 'story-tab-btn flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-brand-600 transition-all';
+                }
+            });
+        }
+
+        // Impact Calculator Handler
+        function updateImpactCalc(val) {
+            document.getElementById('calc-sales-val').innerText = '₹' + parseInt(val).toLocaleString('en-IN');
+            const sessions = Math.floor(val / 1000);
+            document.getElementById('calc-kits-count').innerText = sessions + ' Experiment Sessions';
+            document.getElementById('calc-impact-desc').innerText = 'Funds materials for ' + sessions + ' interactive hands-on science sessions!';
+        }
+
+        // Interactive States of Matter Canvas Simulation
+        let animId;
+        let particles = [];
+        let simTemp = -10;
+
+        function initParticleSim() {
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+
+            particles = [];
+            for (let i = 0; i < 35; i++) {
+                particles.push({
+                    x: Math.random() * (canvas.width - 40) + 20,
+                    y: Math.random() * (canvas.height - 40) + 20,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    radius: 8
+                });
+            }
+
+            if (animId) cancelAnimationFrame(animId);
+            
+            function render() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                let speedMult = 0.2;
+                let color = '#38bdf8';
+                
+                if (simTemp > 0 && simTemp <= 99) {
+                    speedMult = 1.2;
+                    color = '#f59e0b';
+                } else if (simTemp > 99) {
+                    speedMult = 3.5;
+                    color = '#f43f5e';
+                }
+
+                particles.forEach((p, idx) => {
+                    if (simTemp <= 0) {
+                        const gridX = (idx % 7) * 35 + (canvas.width / 2 - 100);
+                        const gridY = Math.floor(idx / 7) * 35 + (canvas.height / 2 - 70);
+                        p.x += (gridX - p.x) * 0.1 + (Math.random() - 0.5) * 0.8;
+                        p.y += (gridY - p.y) * 0.1 + (Math.random() - 0.5) * 0.8;
+                    } else {
+                        p.x += p.vx * speedMult;
+                        p.y += p.vy * speedMult;
+
+                        if (p.x < 15 || p.x > canvas.width - 15) p.vx *= -1;
+                        if (p.y < 15 || p.y > canvas.height - 15) p.vy *= -1;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = color;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                });
+
+                animId = requestAnimationFrame(render);
+            }
+            render();
+        }
+
+        function updateSimTemp(val) {
+            simTemp = parseInt(val);
+            document.getElementById('temp-display').innerText = simTemp + ' °C';
+            
+            const stateLabel = document.getElementById('state-label');
+            const kineticVal = document.getElementById('sim-kinetic-val');
+            const spaceVal = document.getElementById('sim-space-val');
+
+            if (simTemp <= 0) {
+                stateLabel.innerText = 'SOLID (Ice)';
+                stateLabel.className = 'text-lg font-extrabold text-cyan-400';
+                kineticVal.innerText = 'Low (Vibrating)';
+                spaceVal.innerText = 'Tightly Packed Lattice';
+            } else if (simTemp > 0 && simTemp <= 99) {
+                stateLabel.innerText = 'LIQUID (Water)';
+                stateLabel.className = 'text-lg font-extrabold text-amber-400';
+                kineticVal.innerText = 'Moderate (Fluid Flow)';
+                spaceVal.innerText = 'Loosely Bound';
+            } else {
+                stateLabel.innerText = 'GAS (Steam)';
+                stateLabel.className = 'text-lg font-extrabold text-rose-400';
+                kineticVal.innerText = 'High (Rapid Expansion)';
+                spaceVal.innerText = 'Highly Dispersed';
+            }
+        }
+
+        function setSimPreset(temp) {
+            document.getElementById('temp-slider').value = temp;
+            updateSimTemp(temp);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function viewReceipt(filename, item, amount) {
+            document.getElementById('modal-title').innerText = item;
+            document.getElementById('modal-amount').innerText = 'Total Amount: ' + amount;
+            document.getElementById('modal-filename').innerText = filename;
+            document.getElementById('receipt-modal').classList.remove('hidden');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receipt-modal').classList.add('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for reaching out to Prayog Shala! I will get back to you personally soon.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
