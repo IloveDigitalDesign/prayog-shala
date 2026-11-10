@@ -51,6 +51,30 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
+        /* Custom Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            background: #ffffff;
+            aspect-ratio: 4/3;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
@@ -97,7 +121,7 @@
             <button onclick="switchTab('story')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">My Story</button>
             <button onclick="switchTab('fundraising')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Fundraising & Transparency</button>
             <button onclick="switchTab('sessions')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Past Sessions</button>
-            <button onclick="switchTab('contact')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-xl font-semibold text-white bg-brand-600 mt-2">Donate</button>
+            <button onclick="switchTab('contact')" class="mobile-nav-btn block w-full text-left px-4 py-3 rounded-semibold text-white bg-brand-600 mt-2">Donate</button>
         </div>
     </header>
 
@@ -446,18 +470,39 @@
                             <span class="text-xs font-semibold text-slate-700 bg-slate-100 px-3 py-1 rounded-full"><i class="fa-regular fa-calendar mr-1"></i> Saturday, October 31, 2026</span>
                         </div>
                         <h3 class="text-2xl font-bold font-heading text-slate-900">States of Matter, Temperature & Energy Transfer</h3>
-                        <p class="text-slate-500 text-sm mt-1 mb-4"><i class="fa-solid fa-location-dot text-saffron-500 mr-1"></i> Stonehill Government School — 6th Grade Students</p>
+                        <p class="text-slate-500 text-sm mt-1 mb-4"><i class="fa-solid fa-location-dot text-saffron-500 mr-1"></i> Government School — 6th Grade Students</p>
                         
                         <p class="text-slate-600 leading-relaxed text-sm">
-                            Last Saturday, I conducted my first teaching session with the 6th-grade students at Stonehill Government School. I taught them about core physical concepts including states of matter (solid, liquid, gas), temperature measurement, and energy transfer through simple, observation-based experiments.
+                            Last Saturday, I conducted my first teaching session with the 6th-grade students. I taught them about core physical concepts including states of matter (solid, liquid, gas), temperature measurement, and energy transfer through simple, observation-based experiments.
                         </p>
 
                         <!-- Experiment Highlights Tag Cloud -->
-                        <div class="flex flex-wrap gap-2 mt-4">
+                        <div class="flex flex-wrap gap-2 mt-4 mb-8">
                             <span class="text-xs bg-slate-100 text-slate-700 font-medium px-3 py-1 rounded-lg">States of Matter</span>
                             <span class="text-xs bg-slate-100 text-slate-700 font-medium px-3 py-1 rounded-lg">Temperature Measurement</span>
                             <span class="text-xs bg-slate-100 text-slate-700 font-medium px-3 py-1 rounded-lg">Energy Transfer</span>
                             <span class="text-xs bg-saffron-50 text-saffron-800 font-semibold px-3 py-1 rounded-lg border border-saffron-200">Interactive Participation</span>
+                        </div>
+
+                        <!-- Session Photo Gallery Grid -->
+                        <div class="border-t border-slate-100 pt-6">
+                            <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-images text-brand-600"></i> Session Photo Gallery
+                            </h4>
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="images/prayogshala1.jpg" alt="Prayog Shala Session Photo 1" loading="lazy">
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="images/prayogshala2.jpg" alt="Prayog Shala Session Photo 2" loading="lazy">
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="images/prayogshala3.jpg" alt="Prayog Shala Session Photo 3" loading="lazy">
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="images/prayogshala4.jpg" alt="Prayog Shala Session Photo 4" loading="lazy">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
